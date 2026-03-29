@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="../css/style-map.css" />
 </head>
 <body>
@@ -34,7 +35,7 @@
   </header>
 
   <main id="map-africa-main-container" class="map-main-container">
-    <section class="map-hero-panel">
+    <section class="map-hero-panel reveal">
       <div>
         <h1 class="map-hero-title">Carte météo de l’Afrique</h1>
         <p class="map-hero-subtitle">Explorez les conditions en temps réel avec des épingles dynamiques.</p>
@@ -56,7 +57,7 @@
       </div>
     </section>
 
-    <section class="map-canvas-panel">
+    <section class="map-canvas-panel reveal">
       <div class="map-canvas-header">
         <h2 class="map-canvas-title">Afrique</h2>
         <span class="map-canvas-subtitle">Sélectionnez une ville pour voir ses détails</span>
@@ -67,7 +68,7 @@
       </div>
     </section>
 
-    <section class="map-info-panel">
+    <section class="map-info-panel reveal">
       <div class="map-info-header">
         <h2 id="map-info-city" class="map-info-title">Lagos</h2>
         <span id="map-info-status" class="map-info-status">Partiellement nuageux</span>
@@ -105,6 +106,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="../js/weather-api.js"></script>
+  <script src="../js/animations.js"></script>
   <script src="../js/map.js"></script>
 </body>
 </html>

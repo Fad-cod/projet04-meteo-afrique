@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="../css/style-about.css" />
 </head>
 <body>
@@ -29,7 +30,7 @@
   </header>
 
   <main id="about-main-content" class="about-main-container">
-    <section class="about-hero-card">
+    <section class="about-hero-card reveal">
       <div>
         <h1 class="about-hero-title">À propos d’AfriMeteo</h1>
         <p class="about-hero-subtitle">
@@ -53,15 +54,15 @@
       </div>
     </section>
 
-    <section class="about-content-grid">
-      <article class="about-card">
+    <section class="about-content-grid stagger">
+      <article class="about-card hover-lift">
         <h2 class="about-card-title">Objectifs</h2>
         <p class="about-card-text">
           Offrir une interface simple pour consulter la météo actuelle, les prévisions 3 jours
           et comparer plusieurs capitales africaines.
         </p>
       </article>
-      <article class="about-card">
+      <article class="about-card hover-lift">
         <h2 class="about-card-title">Fonctionnalités</h2>
         <ul class="about-card-list">
           <li>Dashboard temps réel</li>
@@ -70,14 +71,14 @@
           <li>Comparaison multi‑villes</li>
         </ul>
       </article>
-      <article class="about-card">
+      <article class="about-card hover-lift">
         <h2 class="about-card-title">Sources de données</h2>
         <p class="about-card-text">
           Les données météo proviennent de WeatherAPI. Les descriptions sont automatiquement
           traduites en français pour une meilleure lecture.
         </p>
       </article>
-      <article class="about-card">
+      <article class="about-card hover-lift">
         <h2 class="about-card-title">Charte graphique</h2>
         <p class="about-card-text">
           Style dashboard sombre inspiré du ciel nocturne, avec accent cyan pour les données
@@ -86,22 +87,22 @@
       </article>
     </section>
 
-    <section class="about-team-panel">
+    <section class="about-team-panel reveal">
       <h2 class="about-team-title">Équipe & rôles</h2>
-      <div class="about-team-grid">
-        <div class="about-team-card">
+      <div class="about-team-grid stagger">
+        <div class="about-team-card hover-lift">
           <span class="about-team-role">Chef de groupe (main)</span>
           <span class="about-team-name">AGUIAR Octiniel</span>
         </div>
-        <div class="about-team-card">
+        <div class="about-team-card hover-lift">
           <span class="about-team-role">Membre A — Carte météo d’une ville</span>
           <span class="about-team-name">Octiniel AGUIAR</span>
         </div>
-        <div class="about-team-card">
+        <div class="about-team-card hover-lift">
           <span class="about-team-role">Membre B — Graphique des températures</span>
           <span class="about-team-name">Noor FERNANDEZ</span>
         </div>
-        <div class="about-team-card">
+        <div class="about-team-card hover-lift">
           <span class="about-team-role">Membre C — Widget vent et humidité</span>
           <span class="about-team-name">MALEHOSSOU Fadele</span>
         </div>
@@ -113,5 +114,7 @@
     <span>AfriMeteo — À propos</span>
     <span>© 2026</span>
   </footer>
+
+  <script src="../js/animations.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/style-accueil.css" />
 </head>
 <body>
@@ -27,7 +28,7 @@
   </header>
 
   <main id="home-main-content" class="home-main-container">
-    <section id="home-hero-main" class="home-hero-section">
+    <section id="home-hero-main" class="home-hero-section reveal">
       <div class="home-hero-text">
         <h1 class="home-hero-title">La météo africaine, claire et immédiate</h1>
         <p class="home-hero-subtitle">
@@ -39,7 +40,7 @@
           <a class="home-hero-secondary-button" href="pages/forecast.html">Voir les prévisions</a>
         </div>
       </div>
-      <div class="home-hero-panel">
+      <div class="home-hero-panel hover-lift">
         <div class="home-hero-panel-header">
           <span class="home-hero-panel-city">Lagos</span>
           <span class="home-hero-panel-time">13:20</span>
@@ -59,43 +60,43 @@
       </div>
     </section>
 
-    <section id="home-features-main" class="home-features-section">
-      <article class="home-feature-card">
+    <section id="home-features-main" class="home-features-section stagger">
+      <article class="home-feature-card hover-lift">
         <h2 class="home-feature-card-title">Dashboard en temps réel</h2>
         <p class="home-feature-card-text">Indicateurs clés, tendances et alertes visibles d’un seul coup d’œil.</p>
       </article>
-      <article class="home-feature-card">
+      <article class="home-feature-card hover-lift">
         <h2 class="home-feature-card-title">Carte interactive</h2>
         <p class="home-feature-card-text">Visualisez les conditions dans les grandes zones urbaines d’Afrique.</p>
       </article>
-      <article class="home-feature-card">
+      <article class="home-feature-card hover-lift">
         <h2 class="home-feature-card-title">Prévisions 7 jours</h2>
         <p class="home-feature-card-text">Planifiez vos activités avec des prévisions fiables et détaillées.</p>
       </article>
     </section>
 
-    <section id="home-cities-main" class="home-cities-section">
+    <section id="home-cities-main" class="home-cities-section reveal">
       <div class="home-cities-header">
         <h2 class="home-cities-title">Villes principales</h2>
         <p class="home-cities-subtitle">Un aperçu rapide des conditions actuelles.</p>
       </div>
-      <div class="home-cities-grid">
-        <div class="home-city-card">
+      <div class="home-cities-grid stagger">
+        <div class="home-city-card hover-lift">
           <div class="home-city-card-name">Abidjan</div>
           <div class="home-city-card-temp">28°</div>
           <div class="home-city-card-status">Orages isolés</div>
         </div>
-        <div class="home-city-card">
+        <div class="home-city-card hover-lift">
           <div class="home-city-card-name">Nairobi</div>
           <div class="home-city-card-temp">22°</div>
           <div class="home-city-card-status">Ciel dégagé</div>
         </div>
-        <div class="home-city-card">
+        <div class="home-city-card hover-lift">
           <div class="home-city-card-name">Dakar</div>
           <div class="home-city-card-temp">30°</div>
           <div class="home-city-card-status">Chaud et sec</div>
         </div>
-        <div class="home-city-card">
+        <div class="home-city-card hover-lift">
           <div class="home-city-card-name">Addis-Abeba</div>
           <div class="home-city-card-temp">19°</div>
           <div class="home-city-card-status">Nuageux</div>
@@ -103,7 +104,7 @@
       </div>
     </section>
 
-    <section id="home-cta-main" class="home-cta-section">
+    <section id="home-cta-main" class="home-cta-section reveal">
       <div class="home-cta-content">
         <h2 class="home-cta-title">Prêt à explorer la météo africaine ?</h2>
         <p class="home-cta-text">Passez au dashboard complet pour comparer les villes et suivre les alertes.</p>
@@ -120,5 +121,7 @@
       <span class="home-footer-link-item">© 2026</span>
     </div>
   </footer>
+
+  <script src="js/animations.js"></script>
 </body>
 </html>

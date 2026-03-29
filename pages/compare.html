@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="../css/style-compare.css" />
 </head>
 <body>
@@ -29,7 +30,7 @@
   </header>
 
   <main id="compare-main-content" class="compare-main-container">
-    <section class="compare-hero-card">
+    <section class="compare-hero-card reveal">
       <div>
         <h1 class="compare-hero-title">Comparer les villes</h1>
         <p class="compare-hero-subtitle">Analyse rapide des conditions météo entre plusieurs capitales africaines.</p>
@@ -51,7 +52,7 @@
       </div>
     </section>
 
-    <section class="compare-input-panel">
+    <section class="compare-input-panel reveal">
       <div class="compare-input-group">
         <label class="compare-input-label" for="compare-city-one">Ville 1</label>
         <input id="compare-city-one" class="compare-input-field" type="text" placeholder="Ex: Lagos" />
@@ -74,8 +75,8 @@
       </div>
     </section>
 
-    <section class="compare-cards-grid">
-      <article class="compare-city-card" data-slot="0">
+    <section class="compare-cards-grid stagger">
+      <article class="compare-city-card hover-lift" data-slot="0">
         <div class="compare-city-card-header">
           <h2 id="compare-city-0-name" class="compare-city-card-title">--</h2>
           <span id="compare-city-0-status" class="compare-city-card-status">--</span>
@@ -102,7 +103,7 @@
           </div>
         </div>
       </article>
-      <article class="compare-city-card" data-slot="1">
+      <article class="compare-city-card hover-lift" data-slot="1">
         <div class="compare-city-card-header">
           <h2 id="compare-city-1-name" class="compare-city-card-title">--</h2>
           <span id="compare-city-1-status" class="compare-city-card-status">--</span>
@@ -129,7 +130,7 @@
           </div>
         </div>
       </article>
-      <article class="compare-city-card" data-slot="2">
+      <article class="compare-city-card hover-lift" data-slot="2">
         <div class="compare-city-card-header">
           <h2 id="compare-city-2-name" class="compare-city-card-title">--</h2>
           <span id="compare-city-2-status" class="compare-city-card-status">--</span>
@@ -156,7 +157,7 @@
           </div>
         </div>
       </article>
-      <article class="compare-city-card" data-slot="3">
+      <article class="compare-city-card hover-lift" data-slot="3">
         <div class="compare-city-card-header">
           <h2 id="compare-city-3-name" class="compare-city-card-title">--</h2>
           <span id="compare-city-3-status" class="compare-city-card-status">--</span>
@@ -183,7 +184,7 @@
           </div>
         </div>
       </article>
-      <article class="compare-city-card" data-slot="4">
+      <article class="compare-city-card hover-lift" data-slot="4">
         <div class="compare-city-card-header">
           <h2 id="compare-city-4-name" class="compare-city-card-title">--</h2>
           <span id="compare-city-4-status" class="compare-city-card-status">--</span>
@@ -220,6 +221,7 @@
   </footer>
 
   <script src="../js/weather-api.js"></script>
+  <script src="../js/animations.js"></script>
   <script src="../js/compare.js"></script>
 </body>
 </html>

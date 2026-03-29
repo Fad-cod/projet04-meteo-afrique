@@ -1,0 +1,80 @@
+:root {
+  --anim-fast: 280ms;
+  --anim-medium: 520ms;
+  --anim-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--anim-medium) var(--anim-ease),
+    transform var(--anim-medium) var(--anim-ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.stagger.is-visible > * {
+  animation: stagger-up var(--anim-medium) var(--anim-ease) forwards;
+}
+
+.stagger.is-visible > *:nth-child(1) { animation-delay: 40ms; }
+.stagger.is-visible > *:nth-child(2) { animation-delay: 80ms; }
+.stagger.is-visible > *:nth-child(3) { animation-delay: 120ms; }
+.stagger.is-visible > *:nth-child(4) { animation-delay: 160ms; }
+.stagger.is-visible > *:nth-child(5) { animation-delay: 200ms; }
+.stagger.is-visible > *:nth-child(6) { animation-delay: 240ms; }
+.stagger.is-visible > *:nth-child(7) { animation-delay: 280ms; }
+.stagger.is-visible > *:nth-child(8) { animation-delay: 320ms; }
+.stagger.is-visible > *:nth-child(9) { animation-delay: 360ms; }
+.stagger.is-visible > *:nth-child(10) { animation-delay: 400ms; }
+
+@keyframes stagger-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hover-lift {
+  transition: transform var(--anim-fast) var(--anim-ease),
+    box-shadow var(--anim-fast) var(--anim-ease);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(8, 16, 31, 0.3);
+}
+
+.pulse {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.bar-animate {
+  animation: grow-bar 800ms var(--anim-ease);
+  transform-origin: bottom;
+}
+
+@keyframes grow-bar {
+  from { transform: scaleY(0.4); opacity: 0.4; }
+  to { transform: scaleY(1); opacity: 1; }
+}
