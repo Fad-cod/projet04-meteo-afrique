@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AfriMeteo — Comparaison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style-compare.css" />
+</head>
+<body>
+  <header id="compare-header-main" class="compare-header-container">
+    <div class="compare-header-brand">
+      <span class="compare-header-brand-icon">⛅</span>
+      <span class="compare-header-brand-name">AfriMeteo</span>
+    </div>
+    <nav class="compare-header-nav">
+      <a class="compare-header-nav-link" href="../index.html">Accueil</a>
+      <a class="compare-header-nav-link" href="dashboard.html">Dashboard</a>
+      <a class="compare-header-nav-link" href="map.html">Carte</a>
+      <a class="compare-header-nav-link" href="forecast.html">Prévisions</a>
+      <a class="compare-header-nav-link is-active" href="compare.html">Comparaison</a>
+      <a class="compare-header-nav-link" href="about.html">À propos</a>
+    </nav>
+    <div class="compare-header-actions">
+      <button id="compare-refresh-button" class="compare-header-action-button" type="button">Actualiser</button>
+    </div>
+  </header>
+
+  <main id="compare-main-content" class="compare-main-container">
+    <section class="compare-hero-card">
+      <div>
+        <h1 class="compare-hero-title">Comparer les villes</h1>
+        <p class="compare-hero-subtitle">Analyse rapide des conditions météo entre plusieurs capitales africaines.</p>
+        <span id="compare-hero-updated" class="compare-hero-updated">Mis à jour récemment</span>
+      </div>
+      <div class="compare-hero-stats">
+        <div class="compare-hero-stat">
+          <span class="compare-hero-stat-label">Villes comparées</span>
+          <span id="compare-hero-count" class="compare-hero-stat-value">3</span>
+        </div>
+        <div class="compare-hero-stat">
+          <span class="compare-hero-stat-label">Ville la plus chaude</span>
+          <span id="compare-hero-hottest" class="compare-hero-stat-value">--</span>
+        </div>
+        <div class="compare-hero-stat">
+          <span class="compare-hero-stat-label">Ville la plus humide</span>
+          <span id="compare-hero-humid" class="compare-hero-stat-value">--</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="compare-input-panel">
+      <div class="compare-input-group">
+        <label class="compare-input-label" for="compare-city-one">Ville 1</label>
+        <input id="compare-city-one" class="compare-input-field" type="text" placeholder="Ex: Lagos" />
+      </div>
+      <div class="compare-input-group">
+        <label class="compare-input-label" for="compare-city-two">Ville 2</label>
+        <input id="compare-city-two" class="compare-input-field" type="text" placeholder="Ex: Dakar" />
+      </div>
+      <div class="compare-input-group">
+        <label class="compare-input-label" for="compare-city-three">Ville 3</label>
+        <input id="compare-city-three" class="compare-input-field" type="text" placeholder="Ex: Nairobi" />
+      </div>
+      <div class="compare-input-group">
+        <label class="compare-input-label" for="compare-city-four">Ville 4</label>
+        <input id="compare-city-four" class="compare-input-field" type="text" placeholder="Ex: Accra" />
+      </div>
+      <div class="compare-input-group">
+        <label class="compare-input-label" for="compare-city-five">Ville 5</label>
+        <input id="compare-city-five" class="compare-input-field" type="text" placeholder="Ex: Tunis" />
+      </div>
+    </section>
+
+    <section class="compare-cards-grid">
+      <article class="compare-city-card" data-slot="0">
+        <div class="compare-city-card-header">
+          <h2 id="compare-city-0-name" class="compare-city-card-title">--</h2>
+          <span id="compare-city-0-status" class="compare-city-card-status">--</span>
+        </div>
+        <img id="compare-city-0-icon" class="compare-city-card-icon" src="" alt=\"\" />
+        <div class="compare-city-card-body">
+          <div class="compare-city-card-temp">
+            <span class="compare-city-card-temp-label">Température</span>
+            <span id="compare-city-0-temp" class="compare-city-card-temp-value">--°</span>
+          </div>
+          <div class="compare-city-card-metrics">
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Humidité</span>
+              <span id="compare-city-0-humidity" class="compare-city-card-metric-value">--%</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Vent</span>
+              <span id="compare-city-0-wind" class="compare-city-card-metric-value">-- km/h</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">UV</span>
+              <span id="compare-city-0-uv" class="compare-city-card-metric-value">--</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="compare-city-card" data-slot="1">
+        <div class="compare-city-card-header">
+          <h2 id="compare-city-1-name" class="compare-city-card-title">--</h2>
+          <span id="compare-city-1-status" class="compare-city-card-status">--</span>
+        </div>
+        <img id="compare-city-1-icon" class="compare-city-card-icon" src="" alt=\"\" />
+        <div class="compare-city-card-body">
+          <div class="compare-city-card-temp">
+            <span class="compare-city-card-temp-label">Température</span>
+            <span id="compare-city-1-temp" class="compare-city-card-temp-value">--°</span>
+          </div>
+          <div class="compare-city-card-metrics">
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Humidité</span>
+              <span id="compare-city-1-humidity" class="compare-city-card-metric-value">--%</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Vent</span>
+              <span id="compare-city-1-wind" class="compare-city-card-metric-value">-- km/h</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">UV</span>
+              <span id="compare-city-1-uv" class="compare-city-card-metric-value">--</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="compare-city-card" data-slot="2">
+        <div class="compare-city-card-header">
+          <h2 id="compare-city-2-name" class="compare-city-card-title">--</h2>
+          <span id="compare-city-2-status" class="compare-city-card-status">--</span>
+        </div>
+        <img id="compare-city-2-icon" class="compare-city-card-icon" src="" alt=\"\" />
+        <div class="compare-city-card-body">
+          <div class="compare-city-card-temp">
+            <span class="compare-city-card-temp-label">Température</span>
+            <span id="compare-city-2-temp" class="compare-city-card-temp-value">--°</span>
+          </div>
+          <div class="compare-city-card-metrics">
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Humidité</span>
+              <span id="compare-city-2-humidity" class="compare-city-card-metric-value">--%</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Vent</span>
+              <span id="compare-city-2-wind" class="compare-city-card-metric-value">-- km/h</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">UV</span>
+              <span id="compare-city-2-uv" class="compare-city-card-metric-value">--</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="compare-city-card" data-slot="3">
+        <div class="compare-city-card-header">
+          <h2 id="compare-city-3-name" class="compare-city-card-title">--</h2>
+          <span id="compare-city-3-status" class="compare-city-card-status">--</span>
+        </div>
+        <img id="compare-city-3-icon" class="compare-city-card-icon" src="" alt=\"\" />
+        <div class="compare-city-card-body">
+          <div class="compare-city-card-temp">
+            <span class="compare-city-card-temp-label">Température</span>
+            <span id="compare-city-3-temp" class="compare-city-card-temp-value">--°</span>
+          </div>
+          <div class="compare-city-card-metrics">
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Humidité</span>
+              <span id="compare-city-3-humidity" class="compare-city-card-metric-value">--%</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Vent</span>
+              <span id="compare-city-3-wind" class="compare-city-card-metric-value">-- km/h</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">UV</span>
+              <span id="compare-city-3-uv" class="compare-city-card-metric-value">--</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="compare-city-card" data-slot="4">
+        <div class="compare-city-card-header">
+          <h2 id="compare-city-4-name" class="compare-city-card-title">--</h2>
+          <span id="compare-city-4-status" class="compare-city-card-status">--</span>
+        </div>
+        <img id="compare-city-4-icon" class="compare-city-card-icon" src="" alt=\"\" />
+        <div class="compare-city-card-body">
+          <div class="compare-city-card-temp">
+            <span class="compare-city-card-temp-label">Température</span>
+            <span id="compare-city-4-temp" class="compare-city-card-temp-value">--°</span>
+          </div>
+          <div class="compare-city-card-metrics">
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Humidité</span>
+              <span id="compare-city-4-humidity" class="compare-city-card-metric-value">--%</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">Vent</span>
+              <span id="compare-city-4-wind" class="compare-city-card-metric-value">-- km/h</span>
+            </div>
+            <div class="compare-city-card-metric">
+              <span class="compare-city-card-metric-label">UV</span>
+              <span id="compare-city-4-uv" class="compare-city-card-metric-value">--</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+    <div id="compare-error-message" class="compare-error-message"></div>
+  </main>
+
+  <footer id="compare-footer-main" class="compare-footer-container">
+    <span>AfriMeteo — Comparaison</span>
+    <span>Données en temps réel</span>
+  </footer>
+
+  <script src="../js/weather-api.js"></script>
+  <script src="../js/compare.js"></script>
+</body>
+</html>
