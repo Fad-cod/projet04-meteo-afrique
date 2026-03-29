@@ -125,3 +125,30 @@ input[type="submit"]:focus-visible,
   from { transform: scaleY(0.4); opacity: 0.4; }
   to { transform: scaleY(1); opacity: 1; }
 }
+
+.update-badge {
+  opacity: 0;
+  transform: translateY(-6px);
+  background: rgba(56, 189, 248, 0.18);
+  color: var(--color-accent-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.update-badge.is-visible {
+  animation: update-pop 1s var(--anim-ease);
+}
+
+@keyframes update-pop {
+  0% { opacity: 0; transform: translateY(-6px); }
+  15% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}

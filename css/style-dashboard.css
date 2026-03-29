@@ -143,6 +143,13 @@ a {
   color: var(--color-text-muted);
   font-size: 0.85rem;
 }
+
+.dashboard-hero-updated-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
 .dashboard-hero-date {
   display: flex;
   flex-direction: column;

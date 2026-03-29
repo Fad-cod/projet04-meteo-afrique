@@ -61,6 +61,13 @@ function updateForecastUI(weatherData) {
   if (errorElement) {
     errorElement.textContent = "";
   }
+
+  const badge = document.getElementById("forecast-update-badge");
+  if (badge) {
+    badge.classList.remove("is-visible");
+    void badge.offsetWidth;
+    badge.classList.add("is-visible");
+  }
 }
 
 function getForecastBadge(dayData, statusText) {

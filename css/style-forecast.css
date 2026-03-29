@@ -145,6 +145,13 @@ a {
   font-size: 0.85rem;
   color: var(--color-text-muted);
 }
+
+.forecast-hero-updated-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
 .forecast-hero-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

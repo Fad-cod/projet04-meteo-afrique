@@ -51,6 +51,13 @@ function updateDashboardUI(weatherData) {
     iconElement.alt = condition;
   }
 
+  const badge = document.getElementById("dashboard-update-badge");
+  if (badge) {
+    badge.classList.remove("is-visible");
+    void badge.offsetWidth;
+    badge.classList.add("is-visible");
+  }
+
   const errorElement = document.getElementById("dashboard-error-message");
   if (errorElement) {
     errorElement.textContent = "";

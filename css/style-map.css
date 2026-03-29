@@ -138,6 +138,13 @@ a {
   color: var(--color-text-muted);
   font-size: 0.85rem;
 }
+
+.map-hero-updated-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
 .map-hero-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

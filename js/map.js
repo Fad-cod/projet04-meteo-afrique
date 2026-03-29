@@ -83,6 +83,13 @@ function updateMapUI(weatherData) {
   if (errorElement) {
     errorElement.textContent = "";
   }
+
+  const badge = document.getElementById("map-update-badge");
+  if (badge) {
+    badge.classList.remove("is-visible");
+    void badge.offsetWidth;
+    badge.classList.add("is-visible");
+  }
 }
 
 function setupLeafletMap() {

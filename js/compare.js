@@ -88,6 +88,12 @@ function fetchAndCompare() {
     if (lastUpdated) {
       setCompareText("compare-hero-updated", formatLastUpdated(lastUpdated));
     }
+    const badge = document.getElementById("compare-update-badge");
+    if (badge) {
+      badge.classList.remove("is-visible");
+      void badge.offsetWidth;
+      badge.classList.add("is-visible");
+    }
     const errorElement = document.getElementById("compare-error-message");
     if (errorElement) {
       errorElement.textContent = hasError ? "Une ou plusieurs villes sont introuvables." : "";
