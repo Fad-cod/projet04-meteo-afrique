@@ -15,19 +15,19 @@
 
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(26px) scale(0.98);
   transition: opacity var(--anim-medium) var(--anim-ease),
     transform var(--anim-medium) var(--anim-ease);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .stagger > * {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(18px) scale(0.99);
 }
 
 .stagger.is-visible > * {
@@ -46,8 +46,8 @@
 .stagger.is-visible > *:nth-child(10) { animation-delay: 400ms; }
 
 @keyframes stagger-up {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(18px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .hover-lift {
@@ -58,6 +58,53 @@
 .hover-lift:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(8, 16, 31, 0.3);
+}
+
+.clickable-hover {
+  transition: transform var(--anim-fast) var(--anim-ease),
+    box-shadow var(--anim-fast) var(--anim-ease),
+    background-color var(--anim-fast) var(--anim-ease),
+    color var(--anim-fast) var(--anim-ease),
+    border-color var(--anim-fast) var(--anim-ease);
+}
+
+a,
+button,
+input[type="button"],
+input[type="submit"],
+[role="button"] {
+  transition: transform var(--anim-fast) var(--anim-ease),
+    box-shadow var(--anim-fast) var(--anim-ease),
+    background-color var(--anim-fast) var(--anim-ease),
+    color var(--anim-fast) var(--anim-ease),
+    border-color var(--anim-fast) var(--anim-ease);
+}
+
+a:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+[role="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(8, 16, 31, 0.25);
+}
+
+a:focus-visible,
+button:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.8);
+  outline-offset: 3px;
+}
+
+.pulse-strong {
+  animation: pulse-strong 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-strong {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
 .pulse {
