@@ -57,6 +57,19 @@ function updateForecastUI(weatherData) {
 
   updateForecastDetails(selectedForecastIndex);
 
+  const detailsPanel = document.querySelector(".forecast-details-panel");
+  const hourlyPanel = document.querySelector(".forecast-hourly-panel");
+  if (detailsPanel) {
+    detailsPanel.classList.remove("is-refreshing");
+    void detailsPanel.offsetWidth;
+    detailsPanel.classList.add("is-refreshing");
+  }
+  if (hourlyPanel) {
+    hourlyPanel.classList.remove("is-refreshing");
+    void hourlyPanel.offsetWidth;
+    hourlyPanel.classList.add("is-refreshing");
+  }
+
   const errorElement = document.getElementById("forecast-error-message");
   if (errorElement) {
     errorElement.textContent = "";
