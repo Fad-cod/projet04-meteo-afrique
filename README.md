@@ -50,6 +50,3 @@ projet04-meteo-afrique/
     └── map.html
 ```
 
-## 👨‍💻 À propos
-
-Ce projet est un projet pédagogique réalisé par **Fad-cod** pour s'entraîner à la conception et à l'intégration d'interfaces web complexes, au versionnement avec Git, et à la création d'animations fluides en vanilla CSS/JS.
