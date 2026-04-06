@@ -281,7 +281,9 @@ a {
 
 .dashboard-wind-direction-icon {
   display: inline-block;
-  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  color: var(--color-accent-cyan);
   transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
