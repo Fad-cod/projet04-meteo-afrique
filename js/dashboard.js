@@ -1,3 +1,13 @@
+function getWindRotation(dir) {
+  const directions = {
+    N: 0, NNE: 22.5, NE: 45, ENE: 67.5,
+    E: 90, ESE: 112.5, SE: 135, SSE: 157.5,
+    S: 180, SSW: 202.5, SW: 225, WSW: 247.5,
+    W: 270, WNW: 292.5, NW: 315, NNW: 337.5
+  };
+  return directions[dir] || 0;
+}
+
 function updateDashboardUI(weatherData) {
   const locationName = weatherData.location?.name || "Ville";
   const current = weatherData.current || {};
@@ -41,6 +51,11 @@ function updateDashboardUI(weatherData) {
   setText("dashboard-wind-humidity-value", `${humidity}%`);
   if (current.pressure_mb) {
     setText("dashboard-wind-pressure-value", `${current.pressure_mb} hPa`);
+  }
+
+  const windIcon = document.getElementById("dashboard-wind-direction-icon");
+  if (windIcon) {
+    windIcon.style.transform = `rotate(${getWindRotation(windDir)}deg)`;
   }
 
   setText("dashboard-last-updated", formatLastUpdated(current.last_updated));
