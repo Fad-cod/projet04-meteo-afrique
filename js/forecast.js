@@ -24,51 +24,8 @@ function updateForecastUI(weatherData) {
   setText("forecast-hero-humidity", `${current.humidity ?? "--"}%`);
   setText("forecast-hero-wind", `${Math.round(current.wind_kph ?? 0)} km/h`);
 
-  const labels = ["Aujourd’hui", "Demain", "Après-demain"];
-  const temps = forecastDays.slice(0, 3).map((item) => item.day || {});
-  const maxAll = Math.max(...temps.map((day) => day.maxtemp_c ?? 0));
-  const minAll = Math.min(...temps.map((day) => day.mintemp_c ?? 0));
-  const rangeSpan = Math.max(1, maxAll - minAll);
-
-  forecastDays.slice(0, 3).forEach((item, index) => {
-    const dayData = item.day || {};
-    const label = labels[index] || item.date;
-    const avgTemp = Math.round(dayData.avgtemp_c ?? 0);
-    const maxTemp = Math.round(dayData.maxtemp_c ?? 0);
-    const minTemp = Math.round(dayData.mintemp_c ?? 0);
-    const status = getConditionLabel(dayData.condition);
-    const iconUrl = getConditionIconUrl(dayData.condition);
-    const badge = getForecastBadge(dayData, status);
-    const rangeWidth = ((maxTemp - minTemp) / rangeSpan) * 100;
-
-    setText(`forecast-day-${index}-label`, label);
-    setText(`forecast-day-${index}-temp`, `${avgTemp}°`);
-    setText(`forecast-day-${index}-status`, status);
-    const iconElement = document.getElementById(`forecast-day-${index}-icon`);
-    if (iconElement) {
-      iconElement.src = iconUrl;
-      iconElement.alt = status;
-    }
-    setText(`forecast-day-${index}-badge`, badge);
-    setText(`forecast-day-${index}-max`, `Max ${maxTemp}°`);
-    setText(`forecast-day-${index}-min`, `Min ${minTemp}°`);
-    setRangeWidth(`forecast-day-${index}-range`, rangeWidth);
-  });
-
-  updateForecastDetails(selectedForecastIndex);
-
-  const detailsPanel = document.querySelector(".forecast-details-panel");
-  const hourlyPanel = document.querySelector(".forecast-hourly-panel");
-  if (detailsPanel) {
-    detailsPanel.classList.remove("is-refreshing");
-    void detailsPanel.offsetWidth;
-    detailsPanel.classList.add("is-refreshing");
-  }
-  if (hourlyPanel) {
-    hourlyPanel.classList.remove("is-refreshing");
-    void hourlyPanel.offsetWidth;
-    hourlyPanel.classList.add("is-refreshing");
-  }
+  renderForecast(forecastDays);
+  updateForecastDetails(0);
 
   const errorElement = document.getElementById("forecast-error-message");
   if (errorElement) {
@@ -83,28 +40,77 @@ function updateForecastUI(weatherData) {
   }
 }
 
-function getForecastBadge(dayData, statusText) {
-  if ((dayData.maxtemp_c ?? 0) >= 35) {
-    return "Chaleur";
-  }
-  if ((dayData.daily_chance_of_rain ?? 0) >= 60) {
-    return "Pluie";
-  }
-  if ((dayData.maxwind_kph ?? 0) >= 30) {
-    return "Vent";
-  }
-  if (statusText) {
-    return statusText;
-  }
-  return "Stabilité";
+function renderForecast(days) {
+  const selectorContainer = document.getElementById("forecast-selector-container");
+  const daysContainer = document.getElementById("forecast-days-container");
+  if (!selectorContainer || !daysContainer) return;
+
+  selectorContainer.innerHTML = "";
+  daysContainer.innerHTML = "";
+
+  const labels = ["Aujourd’hui", "Demain", "Après-demain"];
+  const temps = days.map(d => d.day || {});
+  const maxAll = Math.max(...temps.map(d => d.maxtemp_c ?? 0));
+  const minAll = Math.min(...temps.map(d => d.mintemp_c ?? 0));
+  const rangeSpan = Math.max(1, maxAll - minAll);
+
+  days.forEach((item, index) => {
+    const dayData = item.day || {};
+    let label = labels[index];
+    if (!label) {
+      const date = new Date(item.date);
+      label = date.toLocaleDateString('fr-FR', { weekday: 'long' });
+      label = label.charAt(0).toUpperCase() + label.slice(1);
+    }
+    
+    const avgTemp = Math.round(dayData.avgtemp_c ?? 0);
+    const maxTemp = Math.round(dayData.maxtemp_c ?? 0);
+    const minTemp = Math.round(dayData.mintemp_c ?? 0);
+    const status = getConditionLabel(dayData.condition);
+    const iconUrl = getConditionIconUrl(dayData.condition);
+    const badge = getForecastBadge(dayData, status);
+    const rangeWidth = ((maxTemp - minTemp) / rangeSpan) * 100;
+
+    const btn = document.createElement("button");
+    btn.className = `forecast-selector-button ${index === 0 ? 'is-active' : ''}`;
+    btn.textContent = label;
+    btn.onclick = () => {
+      selectedForecastIndex = index;
+      updateForecastDetails(index);
+      document.querySelectorAll('.forecast-selector-button').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    };
+    selectorContainer.appendChild(btn);
+
+    const card = document.createElement("article");
+    card.className = "forecast-day-card hover-lift";
+    card.innerHTML = `
+      <div class="forecast-day-card-title">${label}</div>
+      <div class="forecast-day-card-temp">${avgTemp}°</div>
+      <img class="forecast-day-card-icon" src="${iconUrl}" alt="${status}" />
+      <div class="forecast-day-card-status">${status}</div>
+      <div class="forecast-day-card-badge-row">
+        <span class="forecast-day-card-badge">${badge}</span>
+      </div>
+      <div class="forecast-day-card-meta">
+        <span class="forecast-day-card-meta-item">Max ${maxTemp}°</span>
+        <span class="forecast-day-card-meta-item">Min ${minTemp}°</span>
+      </div>
+      <div class="forecast-day-card-range">
+        <div class="forecast-day-card-range-track">
+          <div class="forecast-day-card-range-fill" style="width: ${rangeWidth}%"></div>
+        </div>
+      </div>
+    `;
+    daysContainer.appendChild(card);
+  });
 }
 
-function setRangeWidth(id, widthPercent) {
-  const element = document.getElementById(id);
-  if (element) {
-    const clamped = Math.max(10, Math.min(100, widthPercent));
-    element.style.width = `${clamped}%`;
-  }
+function getForecastBadge(dayData, statusText) {
+  if ((dayData.maxtemp_c ?? 0) >= 35) return "Chaleur";
+  if ((dayData.daily_chance_of_rain ?? 0) >= 60) return "Pluie";
+  if ((dayData.maxwind_kph ?? 0) >= 30) return "Vent";
+  return statusText || "Stabilité";
 }
 
 function updateForecastDetails(index) {
@@ -115,7 +121,6 @@ function updateForecastDetails(index) {
   setText("forecast-detail-rain", `${dayData.daily_chance_of_rain ?? "--"}%`);
   setText("forecast-detail-uv", dayData.uv ?? "--");
   updateHourlyTimeline(index);
-  updateSelectorState(index);
 }
 
 function updateHourlyTimeline(index) {
@@ -123,113 +128,61 @@ function updateHourlyTimeline(index) {
   if (!grid) return;
 
   const hours = cachedForecastDays[index]?.hour || [];
-  const selectedHours = hours.filter((_, hourIndex) => hourIndex % 3 === 0).slice(0, 8);
+  const selectedHours = hours.filter((_, hrIndex) => hrIndex % 3 === 0).slice(0, 8);
   grid.innerHTML = "";
 
   selectedHours.forEach((hourItem) => {
     const card = document.createElement("div");
     card.className = "forecast-hourly-card";
-
-    const time = document.createElement("div");
-    time.className = "forecast-hourly-time";
-    time.textContent = hourItem.time?.split(" ")[1] || "--:--";
-
-    const temp = document.createElement("div");
-    temp.className = "forecast-hourly-temp";
-    temp.textContent = `${Math.round(hourItem.temp_c ?? 0)}°`;
-
-    const status = document.createElement("div");
-    status.className = "forecast-hourly-status";
-    status.textContent = getConditionLabel(hourItem.condition);
-
-    card.append(time, temp, status);
+    card.innerHTML = `
+      <div class="forecast-hourly-time">${hourItem.time?.split(" ")[1] || "--:--"}</div>
+      <div class="forecast-hourly-temp">${Math.round(hourItem.temp_c ?? 0)}°</div>
+      <div class="forecast-hourly-status">${getConditionLabel(hourItem.condition)}</div>
+    `;
     grid.appendChild(card);
   });
 
   const subtitle = document.getElementById("forecast-hourly-subtitle");
   if (subtitle) {
-    const labelElement = document.getElementById(`forecast-day-${index}-label`);
-    subtitle.textContent = labelElement ? labelElement.textContent : "Sélection du jour";
-  }
-}
-
-function updateSelectorState(index) {
-  const buttons = [
-    document.getElementById("forecast-select-day-0"),
-    document.getElementById("forecast-select-day-1"),
-    document.getElementById("forecast-select-day-2"),
-  ];
-
-  buttons.forEach((button, buttonIndex) => {
-    if (!button) return;
-    if (buttonIndex === index) {
-      button.classList.add("is-active");
-    } else {
-      button.classList.remove("is-active");
+    const labels = ["Aujourd’hui", "Demain", "Après-demain"];
+    let currentLabel = labels[index];
+    if (!currentLabel && cachedForecastDays[index]) {
+      const date = new Date(cachedForecastDays[index].date);
+      currentLabel = date.toLocaleDateString('fr-FR', { weekday: 'long' });
     }
-  });
-}
-
-function setupDaySelectors() {
-  const selectors = [
-    document.getElementById("forecast-select-day-0"),
-    document.getElementById("forecast-select-day-1"),
-    document.getElementById("forecast-select-day-2"),
-  ];
-
-  selectors.forEach((button, index) => {
-    if (!button) return;
-    button.addEventListener("click", () => {
-      selectedForecastIndex = index;
-      updateForecastDetails(index);
-    });
-  });
+    subtitle.textContent = currentLabel || "Sélection du jour";
+  }
 }
 
 function handleForecastSearch() {
   const input = document.querySelector(".forecast-header-search-input");
-  if (!input) return;
   const button = document.querySelector(".forecast-header-action-button");
+  if (!input) return;
 
   const runSearch = (city) => {
-    if (button) {
-      button.disabled = true;
-    }
+    if (button) button.disabled = true;
     return getWeatherByCity(city)
       .then(updateForecastUI)
       .catch(() => {
-        const errorElement = document.getElementById("forecast-error-message");
-        if (errorElement) {
-          errorElement.textContent = "Ville introuvable ou problème réseau.";
-        }
+        const err = document.getElementById("forecast-error-message");
+        if (err) err.textContent = "Ville introuvable ou problème réseau.";
       })
       .finally(() => {
-        if (button) {
-          button.disabled = false;
-        }
+        if (button) button.disabled = false;
       });
   };
 
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && input.value.trim()) {
-      const city = input.value.trim();
-      runSearch(city);
-    }
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && input.value.trim()) runSearch(input.value.trim());
   });
 
   if (button) {
-    button.addEventListener("click", () => {
-      const city = input.value.trim() || "Lagos";
-      runSearch(city);
-    });
+    button.addEventListener("click", () => runSearch(input.value.trim() || "Lagos"));
   }
 }
 
 getWeatherByCity("Lagos")
   .then(updateForecastUI)
-  .catch(() => {
-    console.warn("Impossible de charger la météo. Vérifie la clé API.");
-  });
+  .catch(() => console.warn("Erreur API."));
 
-setupDaySelectors();
 handleForecastSearch();
