@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AfriMeteo — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/style-dashboard.css" />
+</head>
+<body>
+  <header id="dashboard-header-main" class="dashboard-header-container">
+    <div class="dashboard-header-brand">
+      <span class="dashboard-header-brand-icon">⛅</span>
+      <span class="dashboard-header-brand-name">AfriMeteo</span>
+    </div>
+    <nav class="dashboard-header-nav">
+      <a class="dashboard-header-nav-link" href="../index.html">Accueil</a>
+      <a class="dashboard-header-nav-link is-active" href="dashboard.html">Dashboard</a>
+      <a class="dashboard-header-nav-link" href="map.html">Carte</a>
+      <a class="dashboard-header-nav-link" href="forecast.html">Prévisions</a>
+      <a class="dashboard-header-nav-link" href="compare.html">Comparaison</a>
+      <a class="dashboard-header-nav-link" href="about.html">À propos</a>
+    </nav>
+    <div class="dashboard-header-actions">
+      <div class="dashboard-header-search">
+        <span class="dashboard-header-search-icon">🔍</span>
+        <input class="dashboard-header-search-input" type="text" placeholder="Rechercher une ville" />
+      </div>
+      <button id="dashboard-refresh-button" class="dashboard-header-alert-button" type="button">Actualiser</button>
+    </div>
+  </header>
+
+  <main id="dashboard-weather-main-grid" class="dashboard-main-grid">
+    <section class="dashboard-hero-card reveal">
+      <div class="dashboard-hero-header">
+        <div>
+          <h1 class="dashboard-hero-title">Tableau de bord météo</h1>
+          <p class="dashboard-hero-subtitle">Vue synthétique des conditions actuelles et tendances régionales.</p>
+          <div class="dashboard-hero-updated-row">
+            <span id="dashboard-last-updated" class="dashboard-hero-updated">Mis à jour récemment</span>
+            <span id="dashboard-update-badge" class="update-badge">Mis à jour</span>
+          </div>
+        </div>
+        <div class="dashboard-hero-date">
+          <span class="dashboard-hero-date-day">Vendredi</span>
+          <span class="dashboard-hero-date-value">27 mars 2026</span>
+        </div>
+      </div>
+      <div class="dashboard-hero-stats">
+        <div class="dashboard-hero-stat">
+          <div class="dashboard-hero-stat-label">Ville suivie</div>
+          <div id="dashboard-hero-city-value" class="dashboard-hero-stat-value">Lagos</div>
+        </div>
+        <div class="dashboard-hero-stat">
+          <div class="dashboard-hero-stat-label">Température</div>
+          <div id="dashboard-hero-temp-value" class="dashboard-hero-stat-value">29°</div>
+        </div>
+        <div class="dashboard-hero-stat">
+          <div class="dashboard-hero-stat-label">Humidité</div>
+          <div id="dashboard-hero-humidity-value" class="dashboard-hero-stat-value">62%</div>
+        </div>
+        <div class="dashboard-hero-stat">
+          <div class="dashboard-hero-stat-label">Vent</div>
+          <div id="dashboard-hero-wind-value" class="dashboard-hero-stat-value">18 km/h</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-weather-card hover-lift reveal">
+      <div class="dashboard-weather-card-header">
+        <span id="dashboard-weather-card-city" class="dashboard-weather-card-city">Lagos</span>
+        <span id="dashboard-weather-card-status" class="dashboard-weather-card-status">Partiellement nuageux</span>
+      </div>
+      <div class="dashboard-weather-card-icon-row">
+        <img id="dashboard-weather-card-icon" class="dashboard-weather-card-icon" src="" alt=\"\" />
+      </div>
+      <div class="dashboard-weather-card-body">
+        <div id="dashboard-weather-card-temp" class="dashboard-weather-card-temperature-value">29°</div>
+        <div class="dashboard-weather-card-meta">
+          <span id="dashboard-weather-card-feelslike" class="dashboard-weather-card-meta-item">Ressenti 31°</span>
+          <span id="dashboard-weather-card-humidity" class="dashboard-weather-card-meta-item">Humidité 62%</span>
+          <span id="dashboard-weather-card-uv" class="dashboard-weather-card-meta-item">UV 7</span>
+        </div>
+      </div>
+      <div class="dashboard-weather-card-footer">
+        <span id="dashboard-weather-card-max" class="dashboard-weather-card-footer-item">Max 33°</span>
+        <span id="dashboard-weather-card-min" class="dashboard-weather-card-footer-item">Min 24°</span>
+      </div>
+    </section>
+
+    <div id="dashboard-error-message" class="dashboard-error-message"></div>
+
+    <section class="dashboard-temperature-graph hover-lift reveal">
+      <div class="dashboard-temperature-graph-header">
+        <h2 class="dashboard-temperature-graph-title">Tendance des températures</h2>
+        <span class="dashboard-temperature-graph-range">Dernières 12h</span>
+      </div>
+      <div class="dashboard-temperature-graph-chart">
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 40%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 55%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 60%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 68%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 72%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 65%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 58%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 50%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 45%"></div>
+        <div class="dashboard-temperature-graph-bar bar-animate" style="height: 38%"></div>
+      </div>
+      <div class="dashboard-temperature-graph-footer">
+        <span class="dashboard-temperature-graph-footer-label">22°</span>
+        <span class="dashboard-temperature-graph-footer-label">32°</span>
+      </div>
+    </section>
+
+    <section class="dashboard-wind-widget hover-lift reveal">
+      <div class="dashboard-wind-widget-header">
+        <h2 class="dashboard-wind-widget-title">Vent & humidité</h2>
+        <span class="dashboard-wind-widget-subtitle">Conditions actuelles</span>
+      </div>
+      <div class="dashboard-wind-widget-body">
+        <div id="dashboard-wind-speed-display" class="dashboard-wind-widget-speed-display">18 km/h</div>
+        <div id="dashboard-wind-direction" class="dashboard-wind-widget-direction">NE</div>
+      </div>
+      <div class="dashboard-wind-widget-footer">
+        <div class="dashboard-wind-widget-item">
+          <span class="dashboard-wind-widget-item-label">Humidité</span>
+          <span id="dashboard-wind-humidity-value" class="dashboard-wind-widget-item-value">62%</span>
+        </div>
+        <div class="dashboard-wind-widget-item">
+          <span class="dashboard-wind-widget-item-label">Pression</span>
+          <span id="dashboard-wind-pressure-value" class="dashboard-wind-widget-item-value">1009 hPa</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-alerts-panel reveal">
+      <h2 class="dashboard-alerts-title">Alertes régionales</h2>
+      <div class="dashboard-alert-item hover-lift">
+        <span class="dashboard-alert-item-city">Abidjan</span>
+        <span class="dashboard-alert-item-status">Risque d’orage</span>
+        <span class="dashboard-alert-item-level">Niveau 2</span>
+      </div>
+      <div class="dashboard-alert-item hover-lift">
+        <span class="dashboard-alert-item-city">Dakar</span>
+        <span class="dashboard-alert-item-status">Vague de chaleur</span>
+        <span class="dashboard-alert-item-level">Niveau 3</span>
+      </div>
+      <div class="dashboard-alert-item hover-lift">
+        <span class="dashboard-alert-item-city">Nairobi</span>
+        <span class="dashboard-alert-item-status">Pluies modérées</span>
+        <span class="dashboard-alert-item-level">Niveau 1</span>
+      </div>
+    </section>
+
+    <section class="dashboard-cities-panel reveal">
+      <div class="dashboard-cities-header">
+        <h2 class="dashboard-cities-title">Villes surveillées</h2>
+        <button class="dashboard-cities-action" type="button">Ajouter une ville</button>
+      </div>
+      <div class="dashboard-cities-grid stagger">
+        <div class="dashboard-city-card hover-lift">
+          <div class="dashboard-city-card-name">Accra</div>
+          <div class="dashboard-city-card-temp">30°</div>
+          <div class="dashboard-city-card-status">Ensoleillé</div>
+        </div>
+        <div class="dashboard-city-card hover-lift">
+          <div class="dashboard-city-card-name">Casablanca</div>
+          <div class="dashboard-city-card-temp">23°</div>
+          <div class="dashboard-city-card-status">Brume</div>
+        </div>
+        <div class="dashboard-city-card hover-lift">
+          <div class="dashboard-city-card-name">Kigali</div>
+          <div class="dashboard-city-card-temp">21°</div>
+          <div class="dashboard-city-card-status">Nuages élevés</div>
+        </div>
+        <div class="dashboard-city-card hover-lift">
+          <div class="dashboard-city-card-name">Tunis</div>
+          <div class="dashboard-city-card-temp">26°</div>
+          <div class="dashboard-city-card-status">Ciel clair</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-forecast-panel reveal">
+      <div class="dashboard-forecast-header">
+        <h2 class="dashboard-forecast-title">Prévisions 3 jours</h2>
+        <span class="dashboard-forecast-subtitle">Aujourd’hui, demain, après-demain</span>
+      </div>
+      <div class="dashboard-forecast-grid stagger">
+        <div class="dashboard-forecast-card hover-lift">
+          <div id="dashboard-forecast-day-0-label" class="dashboard-forecast-card-day">Aujourd’hui</div>
+          <div id="dashboard-forecast-day-0-temp" class="dashboard-forecast-card-temp">--°</div>
+          <div id="dashboard-forecast-day-0-status" class="dashboard-forecast-card-status">--</div>
+        </div>
+        <div class="dashboard-forecast-card hover-lift">
+          <div id="dashboard-forecast-day-1-label" class="dashboard-forecast-card-day">Demain</div>
+          <div id="dashboard-forecast-day-1-temp" class="dashboard-forecast-card-temp">--°</div>
+          <div id="dashboard-forecast-day-1-status" class="dashboard-forecast-card-status">--</div>
+        </div>
+        <div class="dashboard-forecast-card hover-lift">
+          <div id="dashboard-forecast-day-2-label" class="dashboard-forecast-card-day">Après-demain</div>
+          <div id="dashboard-forecast-day-2-temp" class="dashboard-forecast-card-temp">--°</div>
+          <div id="dashboard-forecast-day-2-status" class="dashboard-forecast-card-status">--</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="dashboard-footer-main" class="dashboard-footer-container">
+    <span>AfriMeteo — Dashboard</span>
+    <span>Données simulées</span>
+  </footer>
+
+  <script src="../js/weather-api.js"></script>
+  <script src="../js/animations.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
